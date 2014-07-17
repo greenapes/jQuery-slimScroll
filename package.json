@@ -1,0 +1,27 @@
+{
+  "name": "jQuery-slimScroll",
+  "version": "1.3.2",
+  "description": "slimScroll is a small jQuery plugin that transforms any div into a scrollable area. slimScroll doesn't occupy any visual space as it only appears on a user initiated mouse-over.",
+  "main": "jquery.slimscroll.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/greenapes/jQuery-slimScroll.git"
+  },
+  "author": "Piotr Rochala",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/greenapes/jQuery-slimScroll/issues"
+  },
+  "dependencies": {
+    "gulp": "~3.8.6",
+    "gulp-uglify": "~0.3.1",
+    "gulp-jshint": "~1.7.1",
+    "gulp-rename": "~1.2.0"
+  }
+}
