@@ -34,7 +34,7 @@
         start : 'top',
 
         // sets scrollbar opacity
-        opacity : .4,
+        opacity : 0.4,
 
         // enables always-on mode for the scrollbar
         alwaysVisible : false,
@@ -49,7 +49,7 @@
         railColor : '#333',
 
         // sets rail opacity
-        railOpacity : .2,
+        railOpacity : 0.2,
 
         // whether  we should use jQuery UI Draggable to enable bar dragging
         railDraggable : true,
@@ -76,7 +76,10 @@
         borderRadius: '7px',
 
         // sets border radius of the rail
-        railBorderRadius : '7px'
+        railBorderRadius : '7px',
+
+        // minimum bar height
+        minBarHeight: 30
       };
 
       var o = $.extend(defaults, options);
@@ -87,7 +90,7 @@
       var isOverPanel, isOverBar, isDragg, queueHide, touchDif,
         barHeight, percentScroll, lastScroll,
         divS = '<div></div>',
-        minBarHeight = 30,
+        minBarHeight = o.minBarHeight,
         releaseScroll = false;
 
         // used in event handlers and for better minification
@@ -321,7 +324,7 @@
           // use mouse wheel only when mouse is over
           if (!isOverPanel) { return; }
 
-          var e = e || window.event;
+          e = e || window.event;
 
           var delta = 0;
           if (e.wheelDelta) { delta = -e.wheelDelta/120; }
@@ -396,14 +399,14 @@
           }
           else
           {
-            document.attachEvent("onmousewheel", _onWheel)
+            document.attachEvent("onmousewheel", _onWheel);
           }
         }
 
         function getBarHeight()
         {
           // calculate scrollbar height and make sure it is not too small
-          barHeight = Math.max((me.outerHeight() / me[0].scrollHeight) * me.outerHeight(), minBarHeight);
+          barHeight = Math.max((me.outerHeight() / me[0].scrollHeight) * me.outerHeight(), o.minBarHeight);
           bar.css({ height: barHeight + 'px' });
 
           // hide scrollbar if content is not long enough
@@ -426,7 +429,7 @@
             // publish approporiate event
             if (lastScroll != percentScroll)
             {
-                var msg = (~~percentScroll == 0) ? 'top' : 'bottom';
+                var msg = (~~percentScroll === 0) ? 'top' : 'bottom';
                 me.trigger('slimscroll', msg);
             }
           }
