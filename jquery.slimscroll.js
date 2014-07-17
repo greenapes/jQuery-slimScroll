@@ -109,12 +109,24 @@
             if ($.isPlainObject(options))
             {
               // Pass height: auto to an existing slimscroll object to force a resize after contents have changed
-              if ( 'height' in options && options.height == 'auto' ) {
-                me.parent().css('height', 'auto');
-                me.css('height', 'auto');
-                var height = me.parent().parent().height();
-                me.parent().css('height', height);
-                me.css('height', height);
+              if ( 'height' in options ) {
+                if (options.height == 'auto') {
+                  me.parent().css('height', 'auto');
+                  me.css('height', 'auto');
+                  var height = me.parent().parent().height();
+                  me.parent().css('height', height);
+                  me.css('height', height);
+                } else {
+                  var h = options.height;
+                  me.css('height', h);
+                  var maxHeight = me.css('max-height');
+                  if(maxHeight) {
+                    maxHeight = maxHeight.replace('px','')*1;
+                    h = h.replace('px','')*1;
+                    h = Math.min(maxHeight, h) + 'px';
+                  }
+                  me.parent().css('height', h+'px');
+                }
               }
 
               if ('scrollTo' in options)
